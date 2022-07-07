@@ -1,0 +1,41 @@
+{
+  "name": "aws-demo-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "start:dev": "nodemon --inspect ./index.js",
+    "sqs:load": "node ./sqs_load_generator.js",
+    "tar": "find . \\( -name \\*.js -o -name \\*.json -o -name \\public -o -name \\keys \\)  -not -path \"./node_modules/*\" | tar -cvf expressdemo.tgz -T -",
+    "docker:build": "docker build -t expressdemo .",
+    "docker:tag": "docker tag expressdemo:latest 123331553797.dkr.ecr.eu-central-1.amazonaws.com/expressdemo:latest",
+    "docker:push": "docker push 123331553797.dkr.ecr.eu-central-1.amazonaws.com/expressdemo:latest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-crypto/client-node": "^3.1.1",
+    "@aws-sdk/client-firehose": "^3.105.0",
+    "@aws-sdk/client-s3": "^3.45.0",
+    "@aws-sdk/client-sns": "^3.100.0",
+    "@aws-sdk/client-sqs": "^3.95.0",
+    "@aws-sdk/s3-request-presigner": "^3.45.0",
+    "aws-sdk": "^2.1130.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "lifion-kinesis": "^1.3.2",
+    "memjs": "^1.3.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3-rc.0",
+    "node-fetch": "^2.6.6",
+    "on-headers": "^1.0.2",
+    "redis": "^4.0.0-rc.4",
+    "sqs-consumer": "^5.7.0"
+  },
+  "devDependencies": {
+    "i": "^0.3.7",
+    "nodemon": "^2.0.15"
+  }
+}

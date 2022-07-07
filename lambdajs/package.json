@@ -1,0 +1,25 @@
+{
+  "name": "lambdajs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "config": {
+    "log_retention": 7,
+    "memory_size": 128,
+    "runtime": "nodejs16.x",
+    "profile": "myproject",
+    "region": "eu-central-1",
+    // "role": "lambda_dynamo_myproject",
+    "timeout": 10
+  },
+  "scripts": {
+    "clean": "rm -rf ./build",
+    "prebuild": "mkdir -p ./build",
+    "prebuild:zip": "npm run build",
+    "build": "cp ./*.js ./build; cp -r ./src/* ./build/; cp -r ./node_modules/ ./build/node_modules || :",
+    "build:zip": "cd build; zip -X -r ./build.zip *; cd ..",
+    "aws:create": "aws lambda create-function --region $npm_package_config_region --profile $npm_package_config_profile --function-name $npm_package_name --description \"$npm_package_description\" --runtime $npm_package_config_runtime --handler index.handler --role arn:aws:iam::$AWS_ACCOUNT_ID:role/$npm_package_config_role --zip-file fileb://build.zip"
+  },
+  "author": "",
+  "license": "ISC"
+}
